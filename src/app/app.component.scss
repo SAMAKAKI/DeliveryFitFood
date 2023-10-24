@@ -1,0 +1,26 @@
+// @keyframes underline {
+//   0%{
+
+//   }
+// }
+.custom-underline {
+  position: relative;
+}
+
+.custom-underline::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0px;
+  left: 0;
+  background-color: rgb(37 99 235);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.custom-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}

@@ -1,5 +1,11 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# Font Awesome
+/src/assets/fontawesome-free-6.4.2-web
+
+/.angular
+/.vscode
+
 # Compiled output
 /dist
 /tmp
