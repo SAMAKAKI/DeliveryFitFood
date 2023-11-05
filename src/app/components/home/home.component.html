@@ -1,3 +1,4 @@
+<app-header></app-header> 
 <div class="container mt-10 mx-auto">
   <div class="relative mb-[10%]">
     <img class="mx-auto h-[650px] w-[95%] rounded-3xl drop-shadow-xl" src="https://static.vecteezy.com/system/resources/previews/012/047/870/non_2x/trendy-minimalistic-food-delivery-service-or-online-food-order-application-banner-design-template-with-smartphone-screen-and-delivery-scooter-or-it-illustration-free-vector.jpg" alt="Delivery banner" />
@@ -6,72 +7,65 @@
     <img src="https://cdn-icons-png.flaticon.com/128/3183/3183425.png" class="h-[10%] absolute right-80 -bottom-5 -rotate-45 drop-shadow-2xl "/>
   </div>
   <div class="flex justify-between items-center mb-[3%]">
-    <h1 class="font-bold text-3xl">Restaurants</h1>
-    <div class="flex justify-between items-center">
-      <form class="font-bold">   
-        <div class="relative">
-            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                </svg>
-            </div>
-            <input type="text" [(ngModel)]="searchText" id="default-search" class="block w-[350px] p-4 pl-10 text-sm rounded-lg bg-gray-200 placeholder-gray-600 text-gray-600" placeholder="Search by name">
-        </div>
-      </form>
-      <div class="bg-gray-200 text-center w-[50px] h-[50px] pt-2 rounded-full ms-10 cursor-pointer">
-        <fa-icon [icon]="faSliders" class="text-2xl text-gray-600"></fa-icon>
+    <h1 class="font-bold text-3xl text-gray-600 dark:text-slate-50">Restaurants</h1>
+    <div class="relative flex justify-between items-center">  
+      <div class="relative">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+              </svg>
+          </div>
+          <input type="text" [(ngModel)]="searchText" class="font-semibold w-[350px] p-4 pl-10 text-sm rounded-lg bg-gray-200 placeholder-gray-600 text-gray-600 dark:bg-slate-600 dark:text-slate-50 dark:placeholder-slate-50" placeholder="Search by name" required>
+      </div>
+      <div class="relative text-gray-600 bg-gray-200 ms-10 sorts text-center pt-2 cursor-pointer dark:bg-slate-600 dark:text-slate-50">
+        <fa-icon [icon]="faSliders" class="text-2xl "></fa-icon>
+        <ul class="absolute right-7 mt-[65px] top-0 z-10 display font-semibold ">
+          <button class="w-[150px]" (click)="getSortByNameDownList()"><li class="bg-gray-200 px-3 py-2 rounded-lg dark:bg-slate-600" style="--i:0"><fa-icon [icon]="faArrowDown"></fa-icon>&nbsp;A -> Z</li></button>
+          <button class="w-[150px]" (click)="getSortByNameUpList()"><li class="bg-gray-200 my-2 px-3 py-2 rounded-lg dark:bg-slate-600" style="--i:1"><fa-icon [icon]="faArrowUp"></fa-icon>&nbsp;Z -> A</li></button>
+          <button class="w-[150px]" (click)="getSortByDateCreateList()"><li class="bg-gray-200 px-3 py-2 rounded-lg dark:bg-slate-600" style="--i:2"><fa-icon [icon]="faClock"></fa-icon>&nbsp;Date created</li></button>
+        </ul>
       </div>
     </div>
   </div>
   <div class="flex items-center mb-[5%]">
     <button (click)="getAllDeliveryList()"><div class="px-10 py-2 text-md rounded-xl font-semibold" [ngClass]="{
-      'bg-blue-600': kategory == 'all',
-      'text-white': kategory == 'all',
-      'text-gray-600': kategory != 'all',
-      'bg-gray-200': kategory != 'all'
+      'bg-blue-600 text-white': kategory == 'all',
+      'text-gray-600 dark:bg-slate-600 dark:text-slate-50 bg-gray-200': kategory != 'all',
     }"><p>All</p></div></button>
     <button (click)="getBurgersDeliveryList()"><div class="px-10 py-2 text-md rounded-xl font-semibold ms-6" [ngClass]="{
-      'bg-blue-600': kategory == 'burgers',
-      'text-white': kategory == 'burgers',
-      'text-gray-600': kategory != 'burgers',
-      'bg-gray-200': kategory != 'burgers'
+      'bg-blue-600 text-white': kategory == 'burgers',
+      'text-gray-600 dark:bg-slate-600 dark:text-slate-50 bg-gray-200': kategory != 'burgers',
     }"><p>Burgers</p></div></button>
     <button (click)="getSushiDeliveryList()"><div class="bg-gray-200 px-10 py-2 text-md rounded-xl text-gray-600 font-semibold ms-6" [ngClass]="{
-      'bg-blue-600': kategory == 'sushi',
-      'text-white': kategory == 'sushi',
-      'text-gray-600': kategory != 'sushi',
-      'bg-gray-200': kategory != 'sushi'
+      'bg-blue-600 text-white': kategory == 'sushi',
+      'text-gray-600 dark:bg-slate-600 dark:text-slate-50 bg-gray-200': kategory != 'sushi',
     }"><p>Sushi</p></div></button>
     <button (click)="getPizzaDeliveryList()"><div class="bg-gray-200 px-10 py-2 text-md rounded-xl text-gray-600 font-semibold ms-6" [ngClass]="{
-      'bg-blue-600': kategory == 'pizza',
-      'text-white': kategory == 'pizza',
-      'text-gray-600': kategory != 'pizza',
-      'bg-gray-200': kategory != 'pizza'
+      'bg-blue-600 text-white': kategory == 'pizza',
+      'text-gray-600 dark:bg-slate-600 dark:text-slate-50 bg-gray-200': kategory != 'pizza',
     }"><p>Pizza</p></div></button>
     <button (click)="getBreakfastDeliveryList()"><div class="bg-gray-200 px-10 py-2 text-md rounded-xl text-gray-600 font-semibold ms-6" [ngClass]="{
-      'bg-blue-600': kategory == 'breakfast',
-      'text-white': kategory == 'breakfast',
-      'text-gray-600': kategory != 'breakfast',
-      'bg-gray-200': kategory != 'breakfast'
+      'bg-blue-600 text-white': kategory == 'breakfast',
+      'text-gray-600 dark:bg-slate-600 dark:text-slate-50 bg-gray-200': kategory != 'breakfast',
     }"><p>Breakfast</p></div></button>
   </div>
-  <div class="flex flex-wrap items-center mb-10">
-    <div class="w-[350px] h-[380px] shadow-lg shadow-gray-300 rounded-2xl relative me-8 mb-8 realtive" *ngFor="let item of deliveryData">
+  <div class="flex flex-wrap items-center">
+    <div class="w-[350px] h-[380px] shadow-lg shadow-gray-300 dark:shadow-slate-900 rounded-2xl relative me-8 mb-8 realtive" *ngFor="let item of deliveryData | filterSearch: searchText">
       <div class="absolute right-2 top-2 text-center">
-        <a href="#"><fa-icon [icon]="faCircleInfo" class="text-2xl text-blue-600"></fa-icon></a>
+        <a [routerLink]="'products/' + item.id"><fa-icon [icon]="faCircleInfo" class="text-2xl text-blue-600"></fa-icon></a>
       </div>
-      <img [src]="item.imageUrl" [alt]="item.name" class="rounded-t-2xl" />
-      <div class="absolute rounded-2xl left-0 bottom-0 h-[55%] w-full bg-white pt-3 px-4">
+      <img [src]="item.imageUrl" [alt]="item.name" class="rounded-t-2xl" loading="lazy"/>
+      <div class="absolute rounded-2xl left-0 bottom-0 h-[55%] w-full bg-white pt-3 px-4 dark:bg-slate-700">
         <div class="flex justify-between items-center mb-5">
-          <h1 class="font-bold text-2xl">{{ item.name }}</h1>
-          <button><fa-icon [icon]="faHeart" class="text-2xl text-yellow-400"></fa-icon></button>
+          <h1 class="font-bold text-2xl dark:text-slate-50 text-gray-600">{{ item.name }}</h1>
+          <button class="transition-transform hover:scale-110"><fa-icon [icon]="faHeart" class="text-2xl text-yellow-400"></fa-icon></button>
         </div>
         <div class="flex items-center">
-          <p><fa-icon [icon]="faClock" class="text-md text-gray-600 me-2"></fa-icon></p>
-          <p *ngFor="let value of item.description.split(',')" class="me-6">{{ value }}</p>
+          <p><fa-icon [icon]="faClock" class="text-md text-gray-800 me-2 dark:text-slate-200"></fa-icon></p>
+          <p *ngFor="let value of item.description.split(',')" class="me-6 dark:text-slate-50 text-gray-600">{{ value }}</p>
         </div>
         <div class="flex flex-wrap items-center mt-5">
-          <div class="bg-gray-200 px-2.5 py-1 rounded-2xl text-gray-600 font-mono me-4 mb-4" *ngFor="let value of item.nationaly.split(',')">
+          <div class="bg-gray-200 px-2.5 py-1 rounded-2xl text-gray-600 font-mono me-4 mb-4 dark:bg-slate-800 dark:text-slate-50" *ngFor="let value of item.nationaly.split(',')">
             <p>{{ value }}</p>
           </div>
         </div>

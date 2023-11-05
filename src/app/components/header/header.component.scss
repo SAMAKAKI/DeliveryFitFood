@@ -1,0 +1,33 @@
+.custom-underline {
+  position: relative;
+}
+
+.custom-underline::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0px;
+  left: 0;
+  background-color: rgb(37 99 235);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+  -webkit-transform: scaleX(0);
+  -moz-transform: scaleX(0);
+  -ms-transform: scaleX(0);
+  -o-transform: scaleX(0);
+  -webkit-transition: transform 0.25s ease-out;
+  -moz-transition: transform 0.25s ease-out;
+  -ms-transition: transform 0.25s ease-out;
+  -o-transition: transform 0.25s ease-out;
+}
+
+.custom-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+  -webkit-transform: scaleX(1);
+  -moz-transform: scaleX(1);
+  -ms-transform: scaleX(1);
+  -o-transform: scaleX(1);
+}

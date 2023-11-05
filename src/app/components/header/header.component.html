@@ -1,0 +1,18 @@
+<div class="flex items-center justify-between mx-7">
+  <div class="flex items-center justify-between w-[400px]">
+    <a href="/" class="font-bold text-3xl text-blue-600">SAMAKAKI</a>
+    <select class="text-gray-600 text-sm rounded-lg block w-[180px] p-2.5 bg-gray-200 font-bold dark:bg-slate-600 dark:text-slate-50">
+      <option value="Warsaw">Warsaw</option>
+      <option value="Warsaw" selected>Gdansk</option>
+      <option value="Warsaw">Poznan</option>
+    </select>
+  </div>
+  <div class="flex items-center justify-between">
+    <button class="text-2xl text-blue-600 flex transition-transform hover:scale-125 align-middle" (click)="darkMode.set(!darkMode())">
+      <fa-icon [icon]="faMoon" *ngIf="!darkMode()"></fa-icon>
+      <fa-icon [icon]="faSun" *ngIf="darkMode()"></fa-icon>
+    </button>
+    <a href="#" class="font-bold text-blue-600 px-1 py-1 custom-underline mx-7">Sign In</a>
+    <a href="#" class="font-bold bg-blue-600 text-center px-6 py-2 text-white rounded-2xl hover:scale-105 hover:shadow-blue-800 hover:shadow-lg transition-all">Sign Up</a>
+  </div>
+</div>

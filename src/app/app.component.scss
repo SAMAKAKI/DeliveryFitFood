@@ -1,26 +1,28 @@
-// @keyframes underline {
-//   0%{
-
-//   }
-// }
-.custom-underline {
-  position: relative;
-}
-
-.custom-underline::after {
-  content: '';
-  position: absolute;
+.custom-body{
+  overflow: auto;
   width: 100%;
-  transform: scaleX(0);
-  height: 2px;
-  bottom: 0px;
-  left: 0;
-  background-color: rgb(37 99 235);
-  transform-origin: bottom right;
-  transition: transform 0.25s ease-out;
+  height: 100vh;
+}
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-.custom-underline:hover::after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(37 99 235);
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(29 78 216); 
 }

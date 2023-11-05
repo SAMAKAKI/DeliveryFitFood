@@ -31,6 +31,18 @@ export class HomeService implements OnInit {
     return this.http.get(`${this.apiUrl}-breakfast`);
   }
 
+  getDeliveryDataSortByNameDown(): Observable<any>{
+    return this.http.get(`${this.apiUrl}-sort-by-name-down`);
+  }
+
+  getDeliveryDataSortByNameUp(): Observable<any>{
+    return this.http.get(`${this.apiUrl}-sort-by-name-up`);
+  }
+
+  getDeliveryDataSortByDateCreate(): Observable<any>{
+    return this.http.get(`${this.apiUrl}-sort-by-date-create`);
+  }
+
   ngOnInit(): void {
     
   }

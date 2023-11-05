@@ -1,0 +1,33 @@
+<div class="relative">
+  <div #widgetsContent class="absolute flex overflow-hidden w-[99%]">
+    <div class="min-w-[350px] w-[350px] h-[380px] shadow-lg shadow-gray-300 dark:shadow-slate-900 rounded-2xl relative mb-10" *ngFor="let product of values let i = index" [ngClass]="{'me-10': i !== values.length - 1}">
+      <div class="absolute right-2 top-2 text-center">
+        <a [routerLink]="'/products/' + product.id"><fa-icon [icon]="faCircleInfo" class="text-2xl text-blue-600"></fa-icon></a>
+      </div>
+      <img [src]="product.imageUrl" [alt]="product.name" class="rounded-t-2xl" loading="lazy"/>
+      <div class="absolute rounded-2xl left-0 bottom-0 h-[55%] w-full bg-white pt-3 px-4 dark:bg-slate-700">
+        <div class="flex justify-between items-center mb-5">
+          <h1 class="font-bold text-2xl dark:text-slate-50 text-gray-600">{{ product.name }}</h1>
+          <button class="transition-transform hover:scale-110"><fa-icon [icon]="faHeart" class="text-2xl text-yellow-400"></fa-icon></button>
+        </div>
+        <div class="flex items-center">
+          <p><fa-icon [icon]="faClock" class="text-md text-gray-800 me-2 dark:text-slate-200"></fa-icon></p>
+          <p *ngFor="let value of product.description.split(',')" class="me-6 dark:text-slate-50 text-gray-600">{{ value }}</p>
+        </div>
+        <div class="flex flex-wrap items-center mt-5">
+          <div class="bg-gray-200 px-2.5 py-1 rounded-2xl text-gray-600 font-mono me-4 mb-4 dark:bg-slate-800 dark:text-slate-50" *ngFor="let value of product.nationaly.split(',')">
+            <p>{{ value }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="relative text-xl text-gray-400 dark:text-slate-50">
+    <button class="absolute -left-14 top-44 transition-colors hover:text-gray-600 dark:hover:text-slate-500" (click)="scrollLeft()">
+      <fa-icon [icon]="faChevronLeft"></fa-icon>
+    </button>
+    <button class="absolute -right-10 top-44 transition-colors hover:text-gray-600 dark:hover:text-slate-500" (click)="scrollRight()">
+      <fa-icon [icon]="faChevronRight"></fa-icon>
+    </button>
+  </div>
+</div>

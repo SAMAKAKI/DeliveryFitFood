@@ -5,14 +5,20 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import { FilterPipe } from './pipes/filter.pipe';
+import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from './components/header/header.component';
+import { ProductComponent } from './components/product/product.component';
+import { CarouselComponent } from './components/templates/carousel/carousel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    FilterPipe
+    FilterPipe,
+    HeaderComponent,
+    ProductComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,

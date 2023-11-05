@@ -1,0 +1,29 @@
+<app-header></app-header>
+<div class="container mt-20 mx-auto">
+  <div *ngFor="let item of productData">
+    <div class="flex justify-between mb-20">
+      <img [src]="item.imageUrl" [alt]="item.name" class="w-[45%] rounded-3xl">
+      <div class="w-[45%] font-semibold text-gray-600 dark:text-slate-50 text-lg">
+        <div class="flex justify-between">
+          <h1 class="text-4xl font-bold text-center mb-8 ">{{ item.name }}</h1>
+          <div class="text-3xl">
+            <button class="transition-transform hover:scale-125"><fa-icon [icon]="faHeart" class="text-yellow-400 "></fa-icon></button>
+            <button class="transition-transform hover:scale-125 ms-7"><fa-icon [icon]="faCartShopping" class="text-blue-600"></fa-icon></button>
+          </div>
+        </div>
+        <div class="flex items-center mb-4">
+          <p class="text-gray-800 dark:text-slate-200 me-2"><fa-icon [icon]="faClock"></fa-icon></p>
+          <p *ngFor="let value of item.description.split(',')" class="me-4 ">{{ value }}</p>
+        </div>
+        <p class="mb-4">{{ item.fullDescription }}</p>
+        <div class="flex flex-wrap items-center">
+          <div class="bg-gray-200 px-2.5 py-1 rounded-2xl text-gray-600 font-mono me-4 mb-4 dark:bg-slate-700 dark:text-slate-50" *ngFor="let value of item.nationaly.split(',')">
+            <p>{{ value }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-carousel [values]="deliveryData" [numScroll]="2"></app-carousel>
+</div>
+
