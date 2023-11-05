@@ -145,6 +145,66 @@ app.get('/api/delivery-list-breakfast', (req, res) => {
     });
 });
 
+app.get('/api/delivery-list-sort-by-name-down', (req, res) => {
+    let query = "select * from products order by name";
+    db.query(query, (err, result) => {
+        if(err){
+            console.log('database query sort by name down get error ==>');
+        }
+        if(result != []){
+            res.send({
+                message: 'getting sort by name down data is success',
+                data: result
+            });
+        } else{
+            res.send({
+                message: 'getting sort by name down data is error',
+                data: {}
+            })
+        }
+    });
+});
+
+app.get('/api/delivery-list-sort-by-name-up', (req, res) => {
+    let query = "select * from products order by name desc";
+    db.query(query, (err, result) => {
+        if(err){
+            console.log('database query sort by name up get error ==>');
+        }
+        if(result != []){
+            res.send({
+                message: 'getting sort by name up data is success',
+                data: result
+            });
+        } else{
+            res.send({
+                message: 'getting sort by name up data is error',
+                data: {}
+            })
+        }
+    });
+});
+
+app.get('/api/delivery-list-sort-by-date-create', (req, res) => {
+    let query = "select * from products order by dateCreate desc";
+    db.query(query, (err, result) => {
+        if(err){
+            console.log('database query sort by date create get error ==>');
+        }
+        if(result != []){
+            res.send({
+                message: 'getting sort by date create data is success',
+                data: result
+            });
+        } else{
+            res.send({
+                message: 'getting sort by date create data is error',
+                data: {}
+            })
+        }
+    });
+});
+
 app.listen(3000, () => {
     console.log('server is running...');
 });
