@@ -25,10 +25,12 @@ export class HomeComponent implements OnInit{
   kategory: any = 'all';
   searchText: string = '';
 
-  constructor(private homeService: HomeService){
-    
-  }
+  page: number = 1;
+  count: number = 0;
+  tabSize: number = 12;
+  tabSizes: number[] = [4, 8, 12, 16];
 
+  constructor(private homeService: HomeService){}
 
   getAllDeliveryList(){
     this.homeService.getDeliveryData().subscribe((res) => {
@@ -82,6 +84,36 @@ export class HomeComponent implements OnInit{
       this.deliveryData = res.data;
     });
   }
+
+  tabSizesChange(event: any){
+    this.tabSize = event.target.value;
+    this.page = 1;
+    if(this.kategory === 'all')
+      this.getAllDeliveryList();
+    else if(this.kategory === 'burgers')
+      this.getBurgersDeliveryList();
+    else if(this.kategory === 'sushi')
+      this.getSushiDeliveryList();
+    else if(this.kategory === 'pizza')
+      this.getPizzaDeliveryList();
+    else if(this.kategory === 'breakfast')
+      this.getBreakfastDeliveryList();
+  }
+
+  pageChange(event: any){
+      this.page = event;
+      if(this.kategory === 'all')
+      this.getAllDeliveryList();
+    else if(this.kategory === 'burgers')
+      this.getBurgersDeliveryList();
+    else if(this.kategory === 'sushi')
+      this.getSushiDeliveryList();
+    else if(this.kategory === 'pizza')
+      this.getPizzaDeliveryList();
+    else if(this.kategory === 'breakfast')
+      this.getBreakfastDeliveryList();
+  }
+
 
   ngOnInit(): void {
    this.getAllDeliveryList();

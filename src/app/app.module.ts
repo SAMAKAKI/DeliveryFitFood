@@ -10,6 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { ProductComponent } from './components/product/product.component';
 import { CarouselComponent } from './components/templates/carousel/carousel.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,9 @@ import { CarouselComponent } from './components/templates/carousel/carousel.comp
     FilterPipe,
     HeaderComponent,
     ProductComponent,
-    CarouselComponent
+    CarouselComponent,
+    SignInComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,6 +31,7 @@ import { CarouselComponent } from './components/templates/carousel/carousel.comp
     FontAwesomeModule,
     HttpClientModule,
     FormsModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

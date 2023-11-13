@@ -17,7 +17,11 @@
           </div>
           <input type="text" [(ngModel)]="searchText" class="font-semibold w-[350px] p-4 pl-10 text-sm rounded-lg bg-gray-200 placeholder-gray-600 text-gray-600 dark:bg-slate-600 dark:text-slate-50 dark:placeholder-slate-50" placeholder="Search by name" required>
       </div>
-      <div class="relative text-gray-600 bg-gray-200 ms-10 sorts text-center pt-2 cursor-pointer dark:bg-slate-600 dark:text-slate-50">
+      <select (change)="tabSizesChange($event)" class="text-gray-600 text-sm rounded-lg block p-4 bg-gray-200 font-bold dark:bg-slate-600 dark:text-slate-50 mx-10">
+        <option *ngFor="let number of tabSizes" [value]="number" [selected]="number === tabSize">{{ number }}</option>
+        
+      </select>
+      <div class="relative text-gray-600 bg-gray-200 sorts text-center pt-2 cursor-pointer dark:bg-slate-600 dark:text-slate-50">
         <fa-icon [icon]="faSliders" class="text-2xl "></fa-icon>
         <ul class="absolute right-7 mt-[65px] top-0 z-10 display font-semibold ">
           <button class="w-[150px]" (click)="getSortByNameDownList()"><li class="bg-gray-200 px-3 py-2 rounded-lg dark:bg-slate-600" style="--i:0"><fa-icon [icon]="faArrowDown"></fa-icon>&nbsp;A -> Z</li></button>
@@ -27,30 +31,32 @@
       </div>
     </div>
   </div>
-  <div class="flex items-center mb-[5%]">
-    <button (click)="getAllDeliveryList()"><div class="px-10 py-2 text-md rounded-xl font-semibold" [ngClass]="{
-      'bg-blue-600 text-white': kategory == 'all',
-      'text-gray-600 dark:bg-slate-600 dark:text-slate-50 bg-gray-200': kategory != 'all',
-    }"><p>All</p></div></button>
-    <button (click)="getBurgersDeliveryList()"><div class="px-10 py-2 text-md rounded-xl font-semibold ms-6" [ngClass]="{
-      'bg-blue-600 text-white': kategory == 'burgers',
-      'text-gray-600 dark:bg-slate-600 dark:text-slate-50 bg-gray-200': kategory != 'burgers',
-    }"><p>Burgers</p></div></button>
-    <button (click)="getSushiDeliveryList()"><div class="bg-gray-200 px-10 py-2 text-md rounded-xl text-gray-600 font-semibold ms-6" [ngClass]="{
-      'bg-blue-600 text-white': kategory == 'sushi',
-      'text-gray-600 dark:bg-slate-600 dark:text-slate-50 bg-gray-200': kategory != 'sushi',
-    }"><p>Sushi</p></div></button>
-    <button (click)="getPizzaDeliveryList()"><div class="bg-gray-200 px-10 py-2 text-md rounded-xl text-gray-600 font-semibold ms-6" [ngClass]="{
-      'bg-blue-600 text-white': kategory == 'pizza',
-      'text-gray-600 dark:bg-slate-600 dark:text-slate-50 bg-gray-200': kategory != 'pizza',
-    }"><p>Pizza</p></div></button>
-    <button (click)="getBreakfastDeliveryList()"><div class="bg-gray-200 px-10 py-2 text-md rounded-xl text-gray-600 font-semibold ms-6" [ngClass]="{
-      'bg-blue-600 text-white': kategory == 'breakfast',
-      'text-gray-600 dark:bg-slate-600 dark:text-slate-50 bg-gray-200': kategory != 'breakfast',
-    }"><p>Breakfast</p></div></button>
+  <div class="flex items-center mb-[5%] justify-between">
+    <div>
+      <button (click)="getAllDeliveryList()"><div class="px-10 py-2 text-md rounded-xl font-semibold" [ngClass]="{
+        'bg-blue-600 text-white': kategory == 'all',
+        'text-gray-600 dark:bg-slate-600 dark:text-slate-50 bg-gray-200': kategory != 'all',
+      }"><p>All</p></div></button>
+      <button (click)="getBurgersDeliveryList()"><div class="px-10 py-2 text-md rounded-xl font-semibold ms-6" [ngClass]="{
+        'bg-blue-600 text-white': kategory == 'burgers',
+        'text-gray-600 dark:bg-slate-600 dark:text-slate-50 bg-gray-200': kategory != 'burgers',
+      }"><p>Burgers</p></div></button>
+      <button (click)="getSushiDeliveryList()"><div class="bg-gray-200 px-10 py-2 text-md rounded-xl text-gray-600 font-semibold ms-6" [ngClass]="{
+        'bg-blue-600 text-white': kategory == 'sushi',
+        'text-gray-600 dark:bg-slate-600 dark:text-slate-50 bg-gray-200': kategory != 'sushi',
+      }"><p>Sushi</p></div></button>
+      <button (click)="getPizzaDeliveryList()"><div class="bg-gray-200 px-10 py-2 text-md rounded-xl text-gray-600 font-semibold ms-6" [ngClass]="{
+        'bg-blue-600 text-white': kategory == 'pizza',
+        'text-gray-600 dark:bg-slate-600 dark:text-slate-50 bg-gray-200': kategory != 'pizza',
+      }"><p>Pizza</p></div></button>
+      <button (click)="getBreakfastDeliveryList()"><div class="bg-gray-200 px-10 py-2 text-md rounded-xl text-gray-600 font-semibold ms-6" [ngClass]="{
+        'bg-blue-600 text-white': kategory == 'breakfast',
+        'text-gray-600 dark:bg-slate-600 dark:text-slate-50 bg-gray-200': kategory != 'breakfast',
+      }"><p>Breakfast</p></div></button>
+    </div>
   </div>
-  <div class="flex flex-wrap items-center">
-    <div class="w-[350px] h-[380px] shadow-lg shadow-gray-300 dark:shadow-slate-900 rounded-2xl relative me-8 mb-8 realtive" *ngFor="let item of deliveryData | filterSearch: searchText">
+  <div class="flex flex-wrap items-center mb-5">
+    <div class="w-[350px] h-[380px] shadow-lg shadow-gray-300 dark:shadow-slate-900 rounded-2xl relative ms-4 me-4 mb-8 realtive" *ngFor="let item of deliveryData | filterSearch: searchText | paginate: {itemsPerPage: tabSize, currentPage: page, totalItems: count}">
       <div class="absolute right-2 top-2 text-center">
         <a [routerLink]="'products/' + item.id"><fa-icon [icon]="faCircleInfo" class="text-2xl text-blue-600"></fa-icon></a>
       </div>
@@ -72,5 +78,19 @@
       </div>
     </div>
   </div>
+  <pagination-template #p="paginationApi" (pageChange)="pageChange($event)" (pageBoundsCorrection)="pageChange($event)" class="flex justify-between ps-4 pe-6 my-5 items-center">
+    <div [class.disabled]="p.isFirstPage()">
+        <button class="px-5 py-2 text-slate-50 bg-blue-600 rounded-xl font-semibold" (click)="p.previous()">Prev</button>
+    </div>
+    <div class="flex items-center">
+      <div *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
+        <button class="px-5 py-2 text-slate-50 bg-blue-600 rounded-xl font-semibold mx-2" (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">{{ page.label }}</button>
+        <div class="px-5 py-2 bg-gray-200 text-gray-600 rounded-xl font-semibold mx-2 dark:bg-slate-600 dark:text-slate-50" *ngIf="p.getCurrent() === page.value">{{ page.label }}</div>
+      </div>
+    </div>
+    <div [class.disabled]="p.isLastPage()">
+      <button class="px-5 py-2 text-slate-50 bg-blue-600 rounded-xl font-semibold" (click)="p.next()">Next</button>
+    </div>
+ </pagination-template>
 </div>
 

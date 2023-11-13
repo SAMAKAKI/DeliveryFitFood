@@ -1,0 +1,25 @@
+<div class="relative">
+  <div class="absolute p-10 rounded-2xl bg-white dark:bg-slate-700 h-[800px] w-[800px] shadow-xl shadow-gray-300 dark:shadow-slate-900" style="top: 50%; left: 50%; transform: translate(-50%, 9%);">
+    <div class="flex justify-between items-center">
+      <a href="/" class="font-bold text-3xl text-blue-600">SAMAKAKI</a>
+      <div class="flex items-center justify-between">
+        <button class="text-2xl text-blue-600 flex transition-transform hover:scale-125 align-middle" (click)="darkMode.set(!darkMode())">
+          <fa-icon [icon]="faMoon" *ngIf="!darkMode()"></fa-icon>
+          <fa-icon [icon]="faSun" *ngIf="darkMode()"></fa-icon>
+        </button>
+      </div>
+    </div>
+    <div class="mx-auto mt-14 text-center">
+      <h1 class="text-3xl font-bold text-gray-600 dark:text-slate-50 mb-10 ">Welcome back!</h1>
+      <form action="">
+        <input type="text" class="w-[500px] h-[40px] text-lg font-semibold px-3 py-1.5 mb-6 rounded-lg bg-gray-200 dark:bg-slate-50" placeholder="E-mail">
+        <input type="text" class="w-[500px] h-[40px] text-lg font-semibold px-3 py-1.5 mb-6 rounded-lg bg-gray-200 dark:bg-slate-50" placeholder="Password"><br/>
+        <button class="bg-blue-600 px-10 py-2 text-lg rounded-xl font-semibold text-slate-50 hover:scale-105 hover:shadow-blue-800 hover:shadow-lg transition-all">Sing In</button>
+        <p class="mt-5 text-lg text-gray-600 dark:text-slate-50">You dont have an account yet? <a routerLink="/sign-up" class="text-blue-600 underline">Sign Up</a></p>
+      </form>
+      <hr class="h-px my-10 bg-gray-200 border-0 w-[500px] dark:bg-slate-600 mx-auto">
+      <button class="mb-5 bg-blue-600 px-5 py-1.5 font-semibold rounded-lg w-[240px] text-slate-50 hover:scale-105 hover:shadow-blue-800 hover:shadow-lg transition-all"><fa-icon [icon]="faGoogle" class="font-normal"></fa-icon> Continue with Google</button><br/>
+      <button class="bg-blue-600 px-5 py-1.5 font-semibold rounded-lg w-[240px] text-slate-50 hover:scale-105 hover:shadow-blue-800 hover:shadow-lg transition-all"><fa-icon [icon]="faFacebook" class="font-normal"></fa-icon> Continue with Facebook</button>
+    </div>
+  </div>
+</div>
