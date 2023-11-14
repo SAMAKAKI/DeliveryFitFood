@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lis 07, 2023 at 10:25 PM
+-- Generation Time: Lis 15, 2023 at 12:08 AM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.2.4
 
@@ -45,6 +45,26 @@ INSERT INTO `kategory` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `posts`
+--
+
+CREATE TABLE `posts` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`id`, `name`) VALUES
+(3, 'admin'),
+(2, 'moderator'),
+(1, 'user');
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `products`
 --
 
@@ -77,6 +97,34 @@ INSERT INTO `products` (`id`, `name`, `description`, `nationaly`, `imageUrl`, `k
 (11, 'Knife and Fork', '10-20 min, $29 min sum', 'American', 'https://www.tastingtable.com/img/gallery/what-makes-restaurant-burgers-taste-different-from-homemade-burgers-upgrade/l-intro-1662064407.jpg', 'Burgers', '2023-11-03 17:48:37', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut fugiat aperiam adipisci ea eius incidunt, numquam laborum vitae magnam odit deleniti doloremque totam rem amet deserunt doloribus, iure eos minus?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut fugiat aperiam adipisci ea eius incidunt, numquam laborum vitae magnam odit deleniti doloremque totam rem amet deserunt doloribus, iure eos minus?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut fugiat aperiam adipisci ea eius incidunt, numquam laborum vitae magnam odit deleniti doloremque totam rem amet deserunt doloribus, iure eos minus?'),
 (12, 'Chinese Burgers', '35-50 min, $17 min sum', 'American, Chinese', 'https://www.tastingtable.com/img/gallery/what-makes-restaurant-burgers-taste-different-from-homemade-burgers-upgrade/l-intro-1662064407.jpg', 'Burgers', '2023-11-03 17:48:37', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut fugiat aperiam adipisci ea eius incidunt, numquam laborum vitae magnam odit deleniti doloremque totam rem amet deserunt doloribus, iure eos minus?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut fugiat aperiam adipisci ea eius incidunt, numquam laborum vitae magnam odit deleniti doloremque totam rem amet deserunt doloribus, iure eos minus?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut fugiat aperiam adipisci ea eius incidunt, numquam laborum vitae magnam odit deleniti doloremque totam rem amet deserunt doloribus, iure eos minus?');
 
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(150) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `pwd` varchar(255) NOT NULL,
+  `name` varchar(150) DEFAULT NULL,
+  `surname` varchar(150) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `phoneNumber` varchar(50) DEFAULT NULL,
+  `avatar` text DEFAULT NULL,
+  `post` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `pwd`, `name`, `surname`, `address`, `phoneNumber`, `avatar`, `post`) VALUES
+(4, 'SAMAKAKI', 'nikitos.shorick@gmail.com', 'Nikitosicheck2006.', NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 'sfd', 'nikitos.shorick@gmail.com', 'Nikitosicheck2006.', NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 'sdfh', 'nikitos.shorick@gmail.com', '1234567890', NULL, NULL, NULL, NULL, NULL, NULL);
+
 --
 -- Indeksy dla zrzutów tabel
 --
@@ -88,11 +136,24 @@ ALTER TABLE `kategory`
   ADD PRIMARY KEY (`name`);
 
 --
+-- Indeksy dla tabeli `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`name`);
+
+--
 -- Indeksy dla tabeli `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
   ADD KEY `kategory` (`kategory`);
+
+--
+-- Indeksy dla tabeli `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `post` (`post`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -105,6 +166,12 @@ ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -113,6 +180,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`kategory`) REFERENCES `kategory` (`name`);
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`post`) REFERENCES `posts` (`name`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
