@@ -205,6 +205,31 @@ app.get('/api/delivery-list-sort-by-date-create', (req, res) => {
     });
 });
 
+app.post('/api/delivery-users-register', (req, res) => {
+    let username = req.body.username;
+    let email = req.body.email;
+    let password = req.body.password;
+
+    let query = `INSERT INTO users(id, username, email, pwd, name, surname, address, phoneNumber, avatar, post) VALUES (NULL, '${username}', '${email}', '${password}', NULL, NULL, NULL, NULL, NULL, NULL)`;
+
+    db.query(query, (err, result) => {
+        if(err){
+            res.send({
+                errorMsg: 'Error: ' + err
+            });
+        }
+        if(result){
+            res.send({
+                successMsg: 'Success register user'
+            });
+        } else{
+            res.send({
+                errorMsg: 'Error register user'
+            });
+        }
+    });
+});
+
 app.listen(3000, () => {
     console.log('server is running...');
 });
