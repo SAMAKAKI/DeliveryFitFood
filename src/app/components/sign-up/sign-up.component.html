@@ -9,15 +9,29 @@
         </button>
       </div>
     </div>
-    <div class="mx-auto mt-14 text-center">
+    <div class="mx-auto mt-14 text-center relative">
+      <div *ngIf="successMsg" class="absolute -top-12 px-5 rounded-xl text-xl font-semibold bg-green-500 opacity-95 w-full h-10 flex justify-between items-center shadow-md shadow-green-700">
+        <fa-icon [icon]="faCheck" class="text-3xl text-green-800 font-bold"></fa-icon>
+        {{ successMsg }}
+        <button (click)="clearSuccessMsg()"><fa-icon [icon]="faXmark" class="text-2xl text-gray-600 font-bold"></fa-icon></button>
+      </div>
+      <div *ngIf="errorMsg" class="absolute -top-12 px-5 rounded-xl text-xl font-semibold bg-red-500 opacity-95 w-full h-10 flex justify-between items-center shadow-md shadow-red-700">
+        <fa-icon [icon]="faCircleExclamation" class="text-3xl text-red-800 font-bold"></fa-icon>
+        {{ errorMsg }}
+        <button (click)="clearErrorMsg()"><fa-icon [icon]="faXmark" class="text-2xl text-gray-600 font-bold"></fa-icon></button>
+      </div>
       <h1 class="text-3xl font-bold text-gray-600 dark:text-slate-50 mb-10 ">Welcome!</h1>
-      <form action="">
-        <input type="text" class="w-[500px] h-[40px] text-lg font-semibold px-3 py-1.5 mb-6 rounded-lg bg-gray-200 dark:bg-slate-50" placeholder="Name">
-        <input type="text" class="w-[500px] h-[40px] text-lg font-semibold px-3 py-1.5 mb-6 rounded-lg bg-gray-200 dark:bg-slate-50" placeholder="E-mail">
-        <input type="text" class="w-[500px] h-[40px] text-lg font-semibold px-3 py-1.5 mb-6 rounded-lg bg-gray-200 dark:bg-slate-50" placeholder="Password">
-        <input type="text" class="w-[500px] h-[40px] text-lg font-semibold px-3 py-1.5 mb-10 rounded-lg bg-gray-200 dark:bg-slate-50" placeholder="Repeat password"><br/>
-        <button class="bg-blue-600 px-10 py-2 text-lg rounded-xl font-semibold text-slate-50 hover:scale-105 hover:shadow-blue-800 hover:shadow-lg transition-all">Sing Up</button>
-        <p class="mt-5 text-lg text-gray-600 dark:text-slate-50">You dont have an account yet? <a routerLink="/sign-in" class="text-blue-600 underline">Sign In</a></p>
+      <form [formGroup]="registerForm" (ngSubmit)="onSumbit()">
+        <p *ngIf="registerForm.controls['username'].invalid && registerForm.controls['username'].touched" class=" text-red-600 font-semibold text-lg -mt-10">Please check username field</p>
+        <input type="text" class="w-[500px] h-[40px] text-lg font-semibold px-3 py-1.5 mb-6 rounded-lg bg-gray-200 dark:bg-slate-50" placeholder="Username" formControlName="username"><br />
+        <p *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched" class=" text-red-600 font-semibold text-lg -mt-6">Please check email field</p>
+        <input type="email" class="w-[500px] h-[40px] text-lg font-semibold px-3 py-1.5 mb-6 rounded-lg bg-gray-200 dark:bg-slate-50" placeholder="E-mail" formControlName="email">
+        <p *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched" class=" text-red-600 font-semibold text-lg -mt-6">Please check password field</p>
+        <input type="password" class="w-[500px] h-[40px] text-lg font-semibold px-3 py-1.5 mb-6 rounded-lg bg-gray-200 dark:bg-slate-50" placeholder="Password" formControlName="password">
+        <p *ngIf="registerForm.controls['passwordRepeat'].invalid && registerForm.controls['passwordRepeat'].touched" class=" text-red-600 font-semibold text-lg -mt-6">Please check repeat password field</p>
+        <input type="password" class="w-[500px] h-[40px] text-lg font-semibold px-3 py-1.5 mb-10 rounded-lg bg-gray-200 dark:bg-slate-50" placeholder="Repeat password" formControlName="passwordRepeat"><br/>
+        <button class="bg-blue-600 px-10 py-2 text-lg rounded-xl font-semibold text-slate-50 hover:scale-105 hover:shadow-blue-800 hover:shadow-lg transition-all" [disabled]="registerForm.invalid">Sing Up</button>
+        <p class="mt-5 text-lg text-gray-600 dark:text-slate-50">Do you already have an account? <a routerLink="/sign-in" class="text-blue-600 underline">Sign In</a></p>
       </form>
       <hr class="h-px my-10 bg-gray-200 border-0 w-[500px] dark:bg-slate-600 mx-auto">
       <button class="mb-5 bg-blue-600 px-5 py-1.5 font-semibold rounded-lg w-[240px] text-slate-50 hover:scale-105 hover:shadow-blue-800 hover:shadow-lg transition-all"><fa-icon [icon]="faGoogle" class="font-normal"></fa-icon> Continue with Google</button><br/>

@@ -6,7 +6,7 @@ import { HomeComponent } from './components/home/home.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { FilterPipe } from './pipes/filter.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { ProductComponent } from './components/product/product.component';
 import { CarouselComponent } from './components/templates/carousel/carousel.component';
@@ -31,7 +31,8 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     FontAwesomeModule,
     HttpClientModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
