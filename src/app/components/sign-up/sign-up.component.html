@@ -22,6 +22,7 @@
       </div>
       <h1 class="text-3xl font-bold text-gray-600 dark:text-slate-50 mb-10 ">Welcome!</h1>
       <form [formGroup]="registerForm" (ngSubmit)="onSumbit()">
+        <p *ngIf="registerForm.errors?.['usernameError']" class=" text-red-600 font-semibold text-lg -mt-10">Please correct username</p>
         <p *ngIf="registerForm.controls['username'].invalid && registerForm.controls['username'].touched" class=" text-red-600 font-semibold text-lg -mt-10">Please check username field</p>
         <input type="text" class="w-[500px] h-[40px] text-lg font-semibold px-3 py-1.5 mb-6 rounded-lg bg-gray-200 dark:bg-slate-50" placeholder="Username" formControlName="username"><br />
         <p *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched" class=" text-red-600 font-semibold text-lg -mt-6">Please check email field</p>

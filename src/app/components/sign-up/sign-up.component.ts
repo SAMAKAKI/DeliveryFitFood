@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { faGoogle as faGoogleBrands, faFacebook as faFacebookBrands } from '@fortawesome/free-brands-svg-icons';
 import {faMoon as faMoonSolid, faSun as faSunSolid, faCheck as faCheckSolid, faXmark as faXmarkSolid, faCircleExclamation as faCircleExclamationSolid} from '@fortawesome/free-solid-svg-icons';
 import { AppComponent } from 'src/app/app.component';
@@ -23,6 +23,7 @@ export class SignUpComponent implements OnInit{
 
   errorMsg: string = '';
   successMsg: string = '';
+  isUser: boolean = false;
 
   constructor(private appComponent: AppComponent, private signUpService: SignUpService){}
 
@@ -31,7 +32,23 @@ export class SignUpComponent implements OnInit{
     "email": new FormControl('', [Validators.email, Validators.required]),
     "password": new FormControl('', [Validators.required, Validators.minLength(10)]),
     "passwordRepeat": new FormControl('', [Validators.required, Validators.minLength(10)])
+  }, {
+    validators: this.usernameValidator('username')
   });
+
+  usernameValidator(username: string): ValidatorFn{
+    return (control: AbstractControl): ValidationErrors | null => {
+      const formGruop = control as FormGroup;
+      const usernameControl = formGruop.get(username)?.value as string;
+
+      if(!usernameControl.includes(' ')){
+        return null;
+      }
+      else{
+        return {usernameError: true}
+      }
+    }
+  }
 
   clearSuccessMsg(){
     this.successMsg = '';
@@ -44,16 +61,22 @@ export class SignUpComponent implements OnInit{
   onSumbit(){
     if(this.registerForm.valid){
       if(this.registerForm.controls['password'].value == this.registerForm.controls['passwordRepeat'].value){
-        this.signUpService.postRegisterUser({
-          // create validator for username(without space). Because i need find user if is this username or create user with this username 
-          "username": this.registerForm.controls['username'].value,
-          "email": this.registerForm.controls['email'].value,
-          "password": this.registerForm.controls['password'].value}).subscribe(res => {
-          if(res.errorMsg){
-            this.errorMsg = res.errorMsg;
-          }
-          if(res.successMsg){
-            this.successMsg = res.successMsg;
+        this.signUpService.getUserCheckName(this.registerForm.controls['username'].value as string).subscribe(res => {
+          if(!res.isUser){
+            this.signUpService.postRegisterUser({
+              // create validator for username(without space). Because i need find user if is this username or create user with this username 
+              "username": this.registerForm.controls['username'].value,
+              "email": this.registerForm.controls['email'].value,
+              "password": this.registerForm.controls['password'].value}).subscribe(res => {
+              if(res.errorMsg){
+                this.errorMsg = res.errorMsg;
+              }
+              if(res.successMsg){
+                this.successMsg = res.successMsg;
+              }
+            });
+          } else{
+            this.errorMsg = "This username already is in database";
           }
         });
       } else{

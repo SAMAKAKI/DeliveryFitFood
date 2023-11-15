@@ -15,6 +15,10 @@ export class SignUpService implements OnInit{
     return this.http.post(`${this.apiUserUrl}register`, data);
   }
 
+  getUserCheckName(username: string): Observable<any>{
+    return this.http.get(`${this.apiUserUrl}checkName/${username}`);
+  }
+
   ngOnInit(): void {
     
   }
