@@ -2,8 +2,11 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2');
+const bcrypt = require('bcrypt');
 
 const app = express();
+
+const saltRounds = 10;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -209,13 +212,14 @@ app.post('/api/delivery-users-register', (req, res) => {
     let username = req.body.username;
     let email = req.body.email;
     let password = req.body.password;
+    const hashPassword = bcrypt.hashSync(password, saltRounds);
 
-    let query = `INSERT INTO users(id, username, email, pwd, name, surname, address, phoneNumber, avatar, post) VALUES (NULL, '${username}', '${email}', '${password}', NULL, NULL, NULL, NULL, NULL, NULL)`;
+    let query = `INSERT INTO users(id, username, email, pwd, name, surname, address, phoneNumber, avatar, post) VALUES (NULL, '${username}', '${email}', '${hashPassword}', NULL, NULL, NULL, NULL, NULL, 'user')`;
 
     db.query(query, (err, result) => {
         if(err){
             res.send({
-                errorMsg: 'Error: ' + err
+                errorMsg: 'Error: ' + err3
             });
         }
         if(result){
@@ -226,6 +230,26 @@ app.post('/api/delivery-users-register', (req, res) => {
             res.send({
                 errorMsg: 'Error register user'
             });
+        }
+    });
+});
+
+app.get('/api/delivery-users-checkName/:username', (req, res) => {
+    let query = `SELECT * FROM users WHERE username='${req.params.username}'`;
+    db.query(query, (err, result) => {
+        if(err){
+            res.send({
+                message: "Error " + err
+            });
+        }
+        if(result.length > 0){
+            res.send({
+                isUser: true
+            })
+        } else{
+            res.send({
+                isUser: false
+            })
         }
     });
 });
